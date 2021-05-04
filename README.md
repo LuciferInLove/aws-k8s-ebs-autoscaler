@@ -6,6 +6,7 @@
 Enlarges the size of AWS EBS volumes directly or as Kubernetes PVC. It can be used in pair with [alertmanager-webhook-receiver](https://github.com/LuciferInLove/alertmanager-webhook-receiver). You can see a sample of usage in the How it works section below.
 
 NOTE: This is an alpha version, you shouldn't use it in a production environment.
+
 NOTE: Any value of the percents flag causes the size to increase to 1 Gb minimum. For example, if the size of the EBS volume is 5 Gb and the percents is less than 40, the EBS volume size will be increased to 1 Gb.
 
 ## Usage
