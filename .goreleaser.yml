@@ -1,0 +1,24 @@
+builds:
+- binary: aws-k8s-ebs-autoscaler
+  env:
+  - CGO_ENABLED=0
+  goos:
+  - linux
+  goarch:
+  - amd64
+  - arm64
+
+dockers:
+-
+  goarch: amd64
+  ids:
+  - aws-k8s-ebs-autoscaler
+  image_templates:
+  - "quay.io/luciferinlove/aws-k8s-ebs-autoscaler:latest"
+  - "quay.io/luciferinlove/aws-k8s-ebs-autoscaler:{{ .Tag }}"
+
+archives:
+- name_template: "{{ .ProjectName }}_{{ .Tag }}_{{ .Os }}_{{ .Arch }}"
+  format: tar.gz
+  files:
+  - none*
