@@ -7,7 +7,7 @@ Enlarges the size of AWS EBS volumes directly or as Kubernetes PVC. It can be us
 
 NOTE: This is an alpha version, you shouldn't use it in a production environment.
 
-NOTE: Any value of the percents flag causes the size to increase to 1 Gb minimum. For example, if the size of the EBS volume is 5 Gb and the percents is less than 40, the EBS volume size will be increased to 1 Gb.
+NOTE: Any value of the percents flag causes the size to increase to 1 Gb minimum. For example, if the size of the EBS volume is 5 Gb and the percents is less than 35, the EBS volume size will be increased to 1 Gb.
 
 ## Usage
 
@@ -48,6 +48,8 @@ Note that false and multiple consecutive alerts are the responsibility of the mo
 **aws-k8s-ebs-autoscaler** performs actions depending on what was passed as an argument, mount-point or pvc.
 
 ### If mount-point is received in arguments
+
+NOTE: Linux file system won't automatically extend after the volume enlargement. You could run **aws-k8s-ebs-autoscaler** as an init container and then run a container with utilities to extend the Linux file system, but it's better to use external tools for security reasons. Or you can use such tools as [embiggen-disk](https://github.com/bradfitz/embiggen-disk). Read [this](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recognize-expanded-volume-linux.html) doc.
 
 * **aws-k8s-ebs-autoscaler** searches for volume serial number by the mount point. In the case of EBS the serial number is EBS VolumeID.
 * If the snapshot flag was provided as true, it creates an EBS volume snapshot.
